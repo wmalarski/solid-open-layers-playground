@@ -27,9 +27,5 @@ export const MapCard: Component = () => {
     map.setTarget(ref());
   });
 
-  console.log({ map });
-
-  return (
-    <div style={{ width: "500px", height: "500px" }} ref={setRef} id="map" />
-  );
+  return <div class="flex-grow" ref={setRef} />;
 };
