@@ -22,7 +22,7 @@ export default function Root() {
         <Meta charset="utf-8" />
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Body>
+      <Body style={{ height: "100vh", "overflow-y": "clip", margin: "0" }}>
         <Suspense>
           <ErrorBoundary>
             <A href="/">Index</A>
