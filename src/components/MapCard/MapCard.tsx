@@ -1,22 +1,29 @@
 import { Map, View } from "ol";
+import Draw, { createBox } from "ol/interaction/Draw.js";
 import TileLayer from "ol/layer/Tile";
+import VectorLayer from "ol/layer/Vector";
 import OSM from "ol/source/OSM";
+import VectorSource from "ol/source/Vector";
 import { Component, createEffect, createSignal } from "solid-js";
+import { ToolKind } from "./MapCard.utils";
 
 export const MapCard: Component = () => {
-  if (typeof window === "undefined") {
-    // eslint-disable-next-line solid/components-return-once
-    return <div id="map" />;
-  }
-
   const [ref, setRef] = createSignal<HTMLDivElement>();
 
+  const raster = new TileLayer({
+    source: new OSM(),
+  });
+
+  const source = new VectorSource({
+    wrapX: false,
+  });
+
+  const vector = new VectorLayer({
+    source: source,
+  });
+
   const map = new Map({
-    layers: [
-      new TileLayer({
-        source: new OSM(),
-      }),
-    ],
+    layers: [raster, vector],
     target: "map",
     view: new View({
       center: [0, 0],
@@ -28,5 +35,19 @@ export const MapCard: Component = () => {
     map.setTarget(ref());
   });
 
-  return <div class="h-full grow" ref={setRef} />;
+  const [tool, setTool] = createSignal<ToolKind>("selector");
+
+  const draw = new Draw({
+    geometryFunction: createBox(),
+    source,
+    type: "Circle",
+  });
+
+  map.addInteraction(draw);
+
+  return (
+    <div class="flex h-full grow">
+      <div class="h-full grow" ref={setRef} />
+    </div>
+  );
 };
