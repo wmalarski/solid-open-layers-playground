@@ -5,18 +5,19 @@ import { Component, createEffect, createSignal } from "solid-js";
 
 export const MapCard: Component = () => {
   if (typeof window === "undefined") {
+    // eslint-disable-next-line solid/components-return-once
     return <div id="map" />;
   }
 
   const [ref, setRef] = createSignal<HTMLDivElement>();
 
   const map = new Map({
-    target: "map",
     layers: [
       new TileLayer({
         source: new OSM(),
       }),
     ],
+    target: "map",
     view: new View({
       center: [0, 0],
       zoom: 2,
@@ -27,5 +28,5 @@ export const MapCard: Component = () => {
     map.setTarget(ref());
   });
 
-  return <div class="flex-grow" ref={setRef} />;
+  return <div class="h-full grow" ref={setRef} />;
 };

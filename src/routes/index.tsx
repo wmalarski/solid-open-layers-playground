@@ -3,7 +3,7 @@ import { MapCard } from "~/components/MapCard/MapCard";
 
 export default function Home() {
   return (
-    <main class="flex-grow flex flex-col">
+    <main class="flex grow flex-col">
       <Title>Hello World</Title>
       <button>Hello</button>
       <MapCard />
