@@ -6,6 +6,7 @@ import OSM from "ol/source/OSM";
 import VectorSource from "ol/source/Vector";
 import { Component, createEffect, createSignal } from "solid-js";
 import { ToolKind } from "./MapCard.utils";
+import { ToolSwitch } from "./ToolSwitch/ToolSwitch";
 
 export const MapCard: Component = () => {
   const [ref, setRef] = createSignal<HTMLDivElement>();
@@ -19,7 +20,7 @@ export const MapCard: Component = () => {
   });
 
   const vector = new VectorLayer({
-    source: source,
+    source,
   });
 
   const map = new Map({
@@ -37,17 +38,35 @@ export const MapCard: Component = () => {
 
   const [tool, setTool] = createSignal<ToolKind>("selector");
 
-  const draw = new Draw({
-    geometryFunction: createBox(),
-    source,
-    type: "Circle",
-  });
+  createEffect(() => {
+    if (tool() !== "pencil") {
+      return;
+    }
 
-  map.addInteraction(draw);
+    const newDraw = new Draw({
+      geometryFunction: createBox(),
+      source,
+      type: "Circle",
+    });
+
+    map.addInteraction(newDraw);
+
+    newDraw.on("drawend", () => {
+      setTool("selector");
+      map.removeInteraction(newDraw);
+
+      console.log(vector);
+    });
+
+    // onCleanup(() => {
+    //   newDraw.un("")
+    // })
+  });
 
   return (
     <div class="flex h-full grow">
       <div class="h-full grow" ref={setRef} />
+      <ToolSwitch tool={tool()} onToolChange={setTool} />
     </div>
   );
 };
