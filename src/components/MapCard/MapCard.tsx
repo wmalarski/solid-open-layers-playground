@@ -1,10 +1,16 @@
 import { Map, View } from "ol";
-import Draw, { createBox } from "ol/interaction/Draw.js";
+import Draw, { createBox, DrawEvent } from "ol/interaction/Draw.js";
 import TileLayer from "ol/layer/Tile";
 import VectorLayer from "ol/layer/Vector";
 import OSM from "ol/source/OSM";
 import VectorSource from "ol/source/Vector";
-import { Component, createEffect, createSignal } from "solid-js";
+import {
+  Component,
+  createEffect,
+  createSignal,
+  onCleanup,
+  onMount,
+} from "solid-js";
 import { ToolKind } from "./MapCard.utils";
 import { ToolSwitch } from "./ToolSwitch/ToolSwitch";
 
@@ -38,29 +44,32 @@ export const MapCard: Component = () => {
 
   const [tool, setTool] = createSignal<ToolKind>("selector");
 
+  const draw = new Draw({
+    geometryFunction: createBox(),
+    source,
+    type: "Circle",
+  });
+
   createEffect(() => {
     if (tool() !== "pencil") {
       return;
     }
 
-    const newDraw = new Draw({
-      geometryFunction: createBox(),
-      source,
-      type: "Circle",
-    });
-
-    map.addInteraction(newDraw);
-
-    newDraw.on("drawend", () => {
+    const callback = (event: DrawEvent) => {
       setTool("selector");
-      map.removeInteraction(newDraw);
+      map.removeInteraction(draw);
 
-      console.log(vector);
+      console.log(event.feature.getGeometry(), event.feature.getProperties());
+    };
+
+    onMount(() => {
+      map.addInteraction(draw);
+      draw.on("drawend", callback);
     });
 
-    // onCleanup(() => {
-    //   newDraw.un("")
-    // })
+    onCleanup(() => {
+      draw.un("drawend", callback);
+    });
   });
 
   return (
