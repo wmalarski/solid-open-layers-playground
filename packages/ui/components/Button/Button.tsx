@@ -1,10 +1,27 @@
+import { Button as KobalteButton } from "@kobalte/core";
+import { cva, type VariantProps } from "class-variance-authority";
 import type { Component } from "solid-js";
-import type { JSX } from "solid-js/jsx-runtime";
 
-type Props = {
-  children?: JSX.Element;
-};
+export const buttonClass = cva(["btn", "btn-square", "bg-red-600"], {
+  defaultVariants: {
+    isLoading: false,
+  },
+  variants: {
+    isLoading: {
+      false: [],
+      true: ["loading"],
+    },
+  },
+});
 
-export const Button: Component<Props> = (props) => {
-  return <button class="btn">{props.children}</button>;
+type ButtonProps = VariantProps<typeof buttonClass>;
+
+export const Button: Component<KobalteButton.ButtonRootProps & ButtonProps> = (
+  props
+) => {
+  return (
+    <KobalteButton.Root {...props} class={buttonClass({ class: props.class })}>
+      {props.children}
+    </KobalteButton.Root>
+  );
 };

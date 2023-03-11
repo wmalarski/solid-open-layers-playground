@@ -1,4 +1,10 @@
-# SolidStart
+# Opinionated Setup SolidStart
+
+* Turborepo
+* SolidStart
+* TailwindCSS
+* DaisyUI
+* Kobalte.js
 
 Everything you need to build a Solid project, powered by [`solid-start`](https://start.solidjs.com);
 

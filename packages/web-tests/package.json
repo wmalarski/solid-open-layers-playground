@@ -1,0 +1,16 @@
+{
+  "name": "@sol/web-tests",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev:test": "playwright test",
+    "test:e2e": "start-server-and-test \"(cd ../../apps/web && npm run start)\" http://localhost:3000 \"playwright test\""
+  },
+  "dependencies": {
+    "start-server-and-test": "^2.0.0",
+    "@sol/web": "workspace:*"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.31.2"
+  }
+}
