@@ -1,4 +1,6 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Default",
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -8,10 +10,7 @@
     "jsxImportSource": "solid-js",
     "jsx": "preserve",
     "strict": true,
-    "types": ["solid-start/env"],
-    "baseUrl": "./",
-    "paths": {
-      "~/*": ["./src/*"]
-    }
-  }
+    "types": ["solid-start/env"]
+  },
+  "exclude": ["node_modules"]
 }

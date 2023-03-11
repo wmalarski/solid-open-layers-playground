@@ -1,53 +1,25 @@
 {
-  "name": "solid-open-layers",
+  "name": "turborepo-my-starter",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "solid-start dev",
-    "build": "solid-start build",
-    "start": "solid-start start",
-    "=== LINTERS ===": "",
-    "lint": "eslint src --fix --ext .tsx,.ts",
-    "prettier": "prettier 'src/**/*.(ts|tsx)' --write",
-    "tsc": "tsc --noEmit",
-    "code-check": "yarn lint --max-warnings=0 && yarn tsc"
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
-  "type": "module",
   "devDependencies": {
-    "@types/node": "^18.11.18",
-    "@typescript-eslint/eslint-plugin": "^5.50.0",
-    "@typescript-eslint/parser": "^5.50.0",
-    "autoprefixer": "^10.4.13",
-    "esbuild": "^0.14.54",
-    "eslint": "^8.33.0",
-    "eslint-config-prettier": "^8.6.0",
-    "eslint-import-resolver-node": "^0.3.7",
-    "eslint-import-resolver-typescript": "^3.5.3",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jsx-a11y": "^6.7.1",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-solid": "^0.9.4",
-    "eslint-plugin-sort-keys-fix": "^1.1.2",
-    "eslint-plugin-tailwindcss": "^3.8.3",
-    "postcss": "^8.4.21",
-    "prettier": "^2.8.3",
-    "solid-start-node": "^0.2.17",
-    "tailwindcss": "^3.2.4",
-    "typescript": "^4.9.5",
-    "vite": "^3.2.5"
-  },
-  "dependencies": {
-    "@kobalte/core": "^0.5.0",
-    "@kobalte/tailwindcss": "^0.3.0",
-    "@solidjs/meta": "^0.28.2",
-    "@solidjs/router": "^0.7.0",
-    "daisyui": "^2.50.0",
-    "ol": "7.2.2",
-    "solid-js": "^1.6.10",
-    "solid-start": "^0.2.17",
-    "undici": "^5.16.0",
-    "zod": "^3.20.2"
+    "eslint-config-custom": "workspace:*",
+    "prettier": "latest",
+    "turbo": "latest"
   },
   "engines": {
-    "node": ">=16.8"
-  }
+    "node": ">=18.0.0"
+  },
+  "dependencies": {},
+  "packageManager": "pnpm@7.17.1"
 }
