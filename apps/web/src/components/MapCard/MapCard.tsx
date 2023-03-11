@@ -1,17 +1,17 @@
 import { Map, View } from "ol";
-import Draw, { createBox, DrawEvent } from "ol/interaction/Draw.js";
+import Draw, { createBox, type DrawEvent } from "ol/interaction/Draw.js";
 import TileLayer from "ol/layer/Tile";
 import VectorLayer from "ol/layer/Vector";
 import OSM from "ol/source/OSM";
 import VectorSource from "ol/source/Vector";
 import {
-  Component,
   createEffect,
   createSignal,
   onCleanup,
   onMount,
+  type Component,
 } from "solid-js";
-import { ToolKind } from "./MapCard.utils";
+import type { ToolKind } from "./MapCard.utils";
 import { ToolSwitch } from "./ToolSwitch/ToolSwitch";
 
 export const MapCard: Component = () => {

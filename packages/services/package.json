@@ -1,0 +1,16 @@
+{
+  "name": "@sol/services",
+  "version": "0.0.0",
+  "main": "./index.tsx",
+  "types": "./index.tsx",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint *.ts*"
+  },
+  "devDependencies": {
+    "eslint": "^8.36.0",
+    "eslint-config-custom": "workspace:*",
+    "@sol/tsconfig": "workspace:*",
+    "typescript": "^4.9.5"
+  }
+}

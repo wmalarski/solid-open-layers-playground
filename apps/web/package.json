@@ -1,5 +1,5 @@
 {
-  "name": "solid-open-layers",
+  "name": "@sol/web",
   "scripts": {
     "dev": "solid-start dev",
     "build": "solid-start build",
@@ -12,6 +12,7 @@
   },
   "type": "module",
   "devDependencies": {
+    "@sol/tsconfig": "workspace:*",
     "@types/node": "^18.15.0",
     "autoprefixer": "^10.4.14",
     "esbuild": "^0.14.54",
@@ -21,12 +22,12 @@
     "tailwindcss": "^3.2.7",
     "typescript": "^4.9.5",
     "vite": "^4.1.4",
-    "eslint-config-custom": "workspace:*",
-    "tsconfig": "workspace:*"
+    "eslint-config-custom": "workspace:*"
   },
   "dependencies": {
     "@kobalte/core": "^0.7.2",
     "@kobalte/tailwindcss": "^0.5.0",
+    "@sol/services": "workspace:*",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.8.0",
     "daisyui": "^2.51.3",
