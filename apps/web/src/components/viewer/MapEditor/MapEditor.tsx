@@ -11,10 +11,14 @@ import {
   onMount,
   type Component,
 } from "solid-js";
-import type { ToolKind } from "./MapCard.utils";
-import { ToolSwitch } from "./ToolSwitch/ToolSwitch";
+import type { ToolKind } from "../types";
 
-export const MapCard: Component = () => {
+type Props = {
+  tool: ToolKind;
+  onToolChange: (tool: ToolKind) => void;
+};
+
+export const MapEditor: Component<Props> = (props) => {
   const [ref, setRef] = createSignal<HTMLDivElement>();
 
   const raster = new TileLayer({
@@ -42,8 +46,6 @@ export const MapCard: Component = () => {
     map.setTarget(ref());
   });
 
-  const [tool, setTool] = createSignal<ToolKind>("selector");
-
   const draw = new Draw({
     geometryFunction: createBox(),
     source,
@@ -51,12 +53,12 @@ export const MapCard: Component = () => {
   });
 
   createEffect(() => {
-    if (tool() !== "pencil") {
+    if (props.tool !== "pencil") {
       return;
     }
 
     const callback = (event: DrawEvent) => {
-      setTool("selector");
+      props.onToolChange("selector");
       map.removeInteraction(draw);
 
       console.log(event.feature.getGeometry(), event.feature.getProperties());
@@ -72,10 +74,5 @@ export const MapCard: Component = () => {
     });
   });
 
-  return (
-    <div class="flex h-full grow">
-      <div class="h-full grow" ref={setRef} />
-      <ToolSwitch tool={tool()} onToolChange={setTool} />
-    </div>
-  );
+  return <div class="h-full grow" ref={setRef} />;
 };

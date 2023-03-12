@@ -1,5 +1,5 @@
 import type { Component } from "solid-js";
-import type { ToolKind } from "../MapCard.utils";
+import type { ToolKind } from "../types";
 
 type Props = {
   tool: ToolKind;
