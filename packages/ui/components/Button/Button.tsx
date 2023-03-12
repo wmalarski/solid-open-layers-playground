@@ -3,7 +3,7 @@ import { type VariantProps } from "class-variance-authority";
 import type { Component } from "solid-js";
 import { twCva } from "../../utils/twCva";
 
-export const buttonClass = twCva(["btn", "btn-square", "bg-red-600"], {
+export const buttonClass = twCva(["btn", "btn-square"], {
   defaultVariants: {
     isLoading: false,
   },

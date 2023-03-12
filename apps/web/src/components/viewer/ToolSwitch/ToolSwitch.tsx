@@ -1,4 +1,14 @@
-import type { Component } from "solid-js";
+import {
+  RadioGroupItem,
+  RadioGroupItemControl,
+  RadioGroupItemIndicator,
+  RadioGroupItemInput,
+  RadioGroupItemLabel,
+  RadioGroupLabel,
+  RadioGroupRoot,
+} from "@sol/ui/components/RadioGroup";
+import { type Component } from "solid-js";
+import { useTranslation } from "~/utils/i18n";
 import type { ToolKind } from "../types";
 
 type Props = {
@@ -7,30 +17,29 @@ type Props = {
 };
 
 export const ToolSwitch: Component<Props> = (props) => {
+  const { t } = useTranslation("editor");
+
+  const onValueChange = (value: string) => {
+    props.onToolChange(value as ToolKind);
+  };
+
   return (
-    <div class="flex flex-col">
-      <div class="form-control">
-        <label class="label cursor-pointer">
-          <input
-            type="radio"
-            class="radio"
-            checked={props.tool === "pencil"}
-            onChange={() => props.onToolChange("pencil")}
-          />
-          <span class="label-text">Pencil</span>
-        </label>
-      </div>
-      <div class="form-control">
-        <label class="label cursor-pointer">
-          <input
-            type="radio"
-            class="radio"
-            checked={props.tool === "selector"}
-            onChange={() => props.onToolChange("selector")}
-          />
-          <span class="label-text">Selector</span>
-        </label>
-      </div>
-    </div>
+    <RadioGroupRoot value={props.tool} onValueChange={onValueChange}>
+      <RadioGroupLabel>{t("selectTool")}</RadioGroupLabel>
+      <RadioGroupItem value="pencil">
+        <RadioGroupItemInput />
+        <RadioGroupItemControl>
+          <RadioGroupItemIndicator />
+        </RadioGroupItemControl>
+        <RadioGroupItemLabel>{t("pencil")}</RadioGroupItemLabel>
+      </RadioGroupItem>
+      <RadioGroupItem value="selector">
+        <RadioGroupItemInput />
+        <RadioGroupItemControl>
+          <RadioGroupItemIndicator />
+        </RadioGroupItemControl>
+        <RadioGroupItemLabel>{t("selector")}</RadioGroupItemLabel>
+      </RadioGroupItem>
+    </RadioGroupRoot>
   );
 };
