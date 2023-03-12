@@ -12,6 +12,7 @@ import {
   Title,
 } from "solid-start";
 import "./root.css";
+import { I18nProvider } from "./utils/i18n";
 
 export default function Root() {
   return (
@@ -24,9 +25,11 @@ export default function Root() {
       <Body class="flex h-screen flex-col overflow-y-clip">
         <Suspense>
           <ErrorBoundary>
-            <Routes>
-              <FileRoutes />
-            </Routes>
+            <I18nProvider>
+              <Routes>
+                <FileRoutes />
+              </Routes>
+            </I18nProvider>
           </ErrorBoundary>
         </Suspense>
         <Scripts />
