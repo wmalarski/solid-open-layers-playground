@@ -31,6 +31,7 @@
     "@sol/ui": "workspace:*",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.8.0",
+    "@solid-primitives/i18n": "1.2.1",
     "class-variance-authority": "0.4.0",
     "daisyui": "^2.51.3",
     "ol": "7.3.0",

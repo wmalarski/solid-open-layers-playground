@@ -19,6 +19,7 @@ importers:
       '@sol/services': workspace:*
       '@sol/tsconfig': workspace:*
       '@sol/ui': workspace:*
+      '@solid-primitives/i18n': 1.2.1
       '@solidjs/meta': ^0.28.2
       '@solidjs/router': ^0.8.0
       '@types/node': ^18.15.0
@@ -43,6 +44,7 @@ importers:
       '@kobalte/tailwindcss': 0.5.0_tailwindcss@3.2.7
       '@sol/services': link:../../packages/services
       '@sol/ui': link:../../packages/ui
+      '@solid-primitives/i18n': 1.2.1_solid-js@1.6.13
       '@solidjs/meta': 0.28.2_solid-js@1.6.13
       '@solidjs/router': 0.8.0_solid-js@1.6.13
       class-variance-authority: 0.4.0_typescript@4.9.5
@@ -1747,6 +1749,14 @@ packages:
   /@sideway/pinpoint/2.0.0:
     resolution: {integrity: sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==}
 
+  /@solid-primitives/context/0.1.4_solid-js@1.6.13:
+    resolution: {integrity: sha512-k7lwcepYQJazsctHMkz88GAxEH6J7NYUprYjcnpkgD95qqWav8KaaQ3n+uTrB2seSVLMMqok1YyP8dqsiN5ltQ==}
+    peerDependencies:
+      solid-js: ^1.6.0
+    dependencies:
+      solid-js: 1.6.13
+    dev: false
+
   /@solid-primitives/event-listener/2.2.8_solid-js@1.6.13:
     resolution: {integrity: sha512-I3Fw6+1g1YrXBWHwnNi6UaYuRVeaRBN2pvfGvKgnHH4OtfN6mgkGXi7s+/QOJjS29sEdwRDR9tQgxckaIxKZ7A==}
     peerDependencies:
@@ -1754,6 +1764,15 @@ packages:
     dependencies:
       '@solid-primitives/utils': 5.4.0_solid-js@1.6.13
       solid-js: 1.6.13
+
+  /@solid-primitives/i18n/1.2.1_solid-js@1.6.13:
+    resolution: {integrity: sha512-IfpIFPqpKX6pRnGv4qc+02+CGRZl+IGirpbX3Oxk04sEDnOyYOUs9S5+na6jntcU3aAEirchViOxJUheRbJmHQ==}
+    peerDependencies:
+      solid-js: ^1.6.0
+    dependencies:
+      '@solid-primitives/context': 0.1.4_solid-js@1.6.13
+      solid-js: 1.6.13
+    dev: false
 
   /@solid-primitives/keyed/1.1.8_solid-js@1.6.13:
     resolution: {integrity: sha512-HdolUstjmvDTIqedbUFqanKeWUOIUrP3hE8z/UFqYLNRFov6ytQxwhn4lnDwEhKYGcxBHI4pPpJYgmymuXSCyA==}
