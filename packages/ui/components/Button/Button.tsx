@@ -1,8 +1,9 @@
 import { Button as KobalteButton } from "@kobalte/core";
-import { cva, type VariantProps } from "class-variance-authority";
+import { type VariantProps } from "class-variance-authority";
 import type { Component } from "solid-js";
+import { twCva } from "../../utils/twCva";
 
-export const buttonClass = cva(["btn", "btn-square", "bg-red-600"], {
+export const buttonClass = twCva(["btn", "btn-square", "bg-red-600"], {
   defaultVariants: {
     isLoading: false,
   },
@@ -20,8 +21,9 @@ export const Button: Component<KobalteButton.ButtonRootProps & ButtonProps> = (
   props
 ) => {
   return (
-    <KobalteButton.Root {...props} class={buttonClass({ class: props.class })}>
-      {props.children}
-    </KobalteButton.Root>
+    <KobalteButton.Root
+      {...props}
+      class={buttonClass({ class: props.class })}
+    />
   );
 };
