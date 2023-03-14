@@ -1,4 +1,4 @@
-import { createServerClient } from "@sol/services/supabase/createSupabaseClient";
+import { createServerClient } from "@sol/services/supabase/createServerClient";
 import { serverEnv } from "./serverEnv";
 
 type CreateSupabaseServerClientArgs = {

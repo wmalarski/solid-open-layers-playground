@@ -14,6 +14,15 @@ const dict = {
     },
     home: {
       hello: "hello123",
+      title: "Title",
+    },
+    scan: {
+      hello: "hello123",
+      title: "Scan",
+    },
+    scans: {
+      hello: "hello123",
+      title: "Scans",
     },
   },
 };

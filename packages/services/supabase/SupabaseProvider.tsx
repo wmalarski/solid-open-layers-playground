@@ -7,7 +7,7 @@ import {
   type Component,
   type JSX,
 } from "solid-js";
-import { createBrowserClient } from "./createSupabaseClient";
+import { createBrowserClient } from "./createBrowserClient";
 
 type SupabaseContextValue = () => SupabaseClient | null;
 

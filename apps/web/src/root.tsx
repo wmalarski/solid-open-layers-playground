@@ -1,4 +1,6 @@
 // @refresh reload
+import { SessionProvider } from "@sol/services/auth/SessionProvider";
+import { SupabaseProvider } from "@sol/services/supabase/SupabaseProvider";
 import { Suspense } from "solid-js";
 import {
   Body,
@@ -12,6 +14,7 @@ import {
   Title,
 } from "solid-start";
 import "./root.css";
+import { clientEnv } from "./utils/clientEnv";
 import { I18nProvider } from "./utils/i18n";
 
 export default function Root() {
@@ -26,9 +29,16 @@ export default function Root() {
         <Suspense>
           <ErrorBoundary>
             <I18nProvider>
-              <Routes>
-                <FileRoutes />
-              </Routes>
+              <SupabaseProvider
+                supabaseKey={clientEnv.VITE_SUPABASE_ANON_KEY}
+                supabaseUrl={clientEnv.VITE_SUPABASE_URL}
+              >
+                <SessionProvider>
+                  <Routes>
+                    <FileRoutes />
+                  </Routes>
+                </SessionProvider>
+              </SupabaseProvider>
             </I18nProvider>
           </ErrorBoundary>
         </Suspense>
