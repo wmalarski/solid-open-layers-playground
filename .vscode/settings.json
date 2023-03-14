@@ -3,6 +3,7 @@
     "daisyui",
     "kobalte",
     "solidjs",
+    "supabase",
     "tailwindcss",
     "undici"
   ],

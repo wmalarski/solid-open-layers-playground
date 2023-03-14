@@ -8,9 +8,12 @@
     "lint": "eslint *.ts*"
   },
   "devDependencies": {
+    "@sol/tsconfig": "workspace:*",
     "eslint": "^8.36.0",
     "eslint-config-custom": "workspace:*",
-    "@sol/tsconfig": "workspace:*",
+    "solid-js": "1.6.14",
+    "@supabase/supabase-js": "2.10.0",
+    "@supabase/auth-helpers-shared": "0.3.0",
     "typescript": "^4.9.5"
   }
 }
