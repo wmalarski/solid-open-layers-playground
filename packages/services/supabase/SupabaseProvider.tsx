@@ -1,4 +1,4 @@
-import type { SupabaseClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import {
   createContext,
   createSignal,
@@ -7,7 +7,6 @@ import {
   type Component,
   type JSX,
 } from "solid-js";
-import { createBrowserClient } from "./createBrowserClient";
 
 type SupabaseContextValue = () => SupabaseClient | null;
 
@@ -23,8 +22,8 @@ export const SupabaseProvider: Component<Props> = (props) => {
   const [client, setClient] = createSignal<SupabaseClient | null>(null);
 
   onMount(() => {
-    const client = createBrowserClient(props.supabaseUrl, props.supabaseKey);
-    setClient(client);
+    const supabase = createClient(props.supabaseUrl, props.supabaseKey);
+    setClient(supabase);
   });
 
   return (

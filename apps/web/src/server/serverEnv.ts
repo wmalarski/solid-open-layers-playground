@@ -6,6 +6,7 @@ if (!isServer) {
 }
 
 const envSchema = z.object({
+  VITE_SESSION_SECRET: z.string(),
   VITE_SUPABASE_ANON_KEY: z.string(),
   VITE_SUPABASE_URL: z.string(),
 });
