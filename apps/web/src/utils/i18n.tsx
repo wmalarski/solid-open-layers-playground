@@ -7,6 +7,11 @@ import type { Component, JSX } from "solid-js";
 
 const dict = {
   en: {
+    auth: {
+      signUp: {
+        button: "Sign up",
+      },
+    },
     editor: {
       pencil: "Pencil",
       selectTool: "Select Tool",
