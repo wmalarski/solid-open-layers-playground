@@ -16,12 +16,10 @@ const storage = createCookieSessionStorage({
 
 type CreateSupabaseServerClientArgs = {
   request: Request;
-  response: Response;
 };
 
 export const createSupabaseServerClient = async ({
   request,
-  response,
 }: CreateSupabaseServerClientArgs) => {
   const supabase = createClient(
     serverEnv.VITE_SUPABASE_URL,
@@ -36,7 +34,7 @@ export const createSupabaseServerClient = async ({
   const refreshToken = session.get("refreshToken");
 
   if (!accessToken || !refreshToken) {
-    return { session: null, supabase };
+    return { cookie: null, session: null, supabase };
   }
 
   const userResponse = await supabase.auth.setSession({
@@ -45,25 +43,48 @@ export const createSupabaseServerClient = async ({
   });
 
   if (userResponse.error || !userResponse.data.session) {
-    response.headers.set("Set-Cookie", await storage.destroySession(session));
-    return { session: null, supabase };
+    const cookie = await storage.destroySession(session);
+    return { cookie, session: null, supabase };
   }
 
   if (userResponse.data.session.access_token === accessToken) {
     session.set("accessToken", userResponse.data.session.access_token);
     session.set("refreshToken", userResponse.data.session.refresh_token);
-    response.headers.set("Set-Cookie", await storage.commitSession(session));
+    const cookie = await storage.commitSession(session);
+    return { cookie, session: userResponse.data.session, supabase };
   }
 
   return { session: userResponse.data.session, supabase };
 };
 
-export const destroyUserSession = async ({
+type CreateUserSessionArgs = {
+  request: Request;
+  accessToken: string;
+  refreshToken: string;
+};
+
+export const createUserSession = async ({
   request,
-  response,
-}: CreateSupabaseServerClientArgs) => {
+  accessToken,
+  refreshToken,
+}: CreateUserSessionArgs) => {
   const cookie = request.headers.get("Cookie") ?? "";
   const session = await storage.getSession(cookie);
 
-  response.headers.set("Set-Cookie", await storage.destroySession(session));
+  session.set("accessToken", accessToken);
+  session.set("refreshToken", refreshToken);
+  return storage.commitSession(session);
+};
+
+type DestroyUserSessionArgs = {
+  request: Request;
+};
+
+export const destroyUserSession = async ({
+  request,
+}: DestroyUserSessionArgs) => {
+  const cookie = request.headers.get("Cookie") ?? "";
+  const session = await storage.getSession(cookie);
+
+  return storage.destroySession(session);
 };

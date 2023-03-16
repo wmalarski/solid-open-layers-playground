@@ -2,8 +2,10 @@ import type { Session } from "@supabase/supabase-js";
 import {
   createContext,
   createEffect,
+  createMemo,
   createSignal,
   onCleanup,
+  useContext,
   type Component,
   type JSX,
 } from "solid-js";
@@ -25,6 +27,21 @@ const defaultValue: SessionContextValue = () => {
 };
 
 const SessionContext = createContext<SessionContextValue>(defaultValue);
+
+export const useSessionState = () => {
+  return useContext(SessionContext);
+};
+
+export const useSession = () => {
+  const state = useContext(SessionContext);
+
+  const session = createMemo(() => {
+    const current = state();
+    return current.state === "authorized" ? current.session : null;
+  });
+
+  return session;
+};
 
 type Props = {
   children: JSX.Element;
